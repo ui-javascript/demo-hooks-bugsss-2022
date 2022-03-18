@@ -1,25 +1,23 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 
-function monitor(count, text, a) {
-  console.log(`count: ${count} text: ${text} a: ${a}`);
-}
 
-function App() {
+
+function App(props) {
   const [count, setCount] = useState(0);
   const [text, setText] = useState("");
   const [a, setA] = useState("");
 
   useEffect(() => {
-    monitor(count, text, a);
-  }, [count]);
+    props.monitor(props.count, count, text, a);
+  }, [props.count, count]);
 
   return (
     <div>
-        当 props.count 和 count 变化时，上报当前所有数据
+    
 
       <div className="mt-2">
-        count: {count}
+        子count: {count}
         <button className="ml-5" onClick={() => setCount((c) => c + 1)}>click</button>
       </div>
 
@@ -42,4 +40,4 @@ function App() {
   );
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+export default App;

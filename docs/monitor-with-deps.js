@@ -86,10 +86,81 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./_hooks/monitor-deps.js":
-/*!********************************!*\
-  !*** ./_hooks/monitor-deps.js ***!
-  \********************************/
+/***/ "./_hooks/components/ChildApp.js":
+/*!***************************************!*\
+  !*** ./_hooks/components/ChildApp.js ***!
+  \***************************************/
+/*! no static exports found */
+/*! all exports used */
+/*! ModuleConcatenation bailout: Module is not an ECMAScript module */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireWildcard = __webpack_require__(/*! ./node_modules/babel-preset-umi/node_modules/@babel/runtime/helpers/interopRequireWildcard */ "./node_modules/babel-preset-umi/node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
+var _interopRequireDefault = __webpack_require__(/*! ./node_modules/babel-preset-umi/node_modules/@babel/runtime/helpers/interopRequireDefault */ "./node_modules/babel-preset-umi/node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! ./node_modules/babel-preset-umi/node_modules/@babel/runtime/helpers/slicedToArray */ "./node_modules/babel-preset-umi/node_modules/@babel/runtime/helpers/slicedToArray.js"));
+
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _reactDom = _interopRequireDefault(__webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js"));
+
+function App(props) {
+  var _useState = (0, _react.useState)(0),
+      _useState2 = (0, _slicedToArray2.default)(_useState, 2),
+      count = _useState2[0],
+      setCount = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(""),
+      _useState4 = (0, _slicedToArray2.default)(_useState3, 2),
+      text = _useState4[0],
+      setText = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(""),
+      _useState6 = (0, _slicedToArray2.default)(_useState5, 2),
+      a = _useState6[0],
+      setA = _useState6[1];
+
+  (0, _react.useEffect)(() => {
+    props.monitor(props.count, count, text, a);
+  }, [props.count, count]);
+  return _react.default.createElement("div", null, _react.default.createElement("div", {
+    className: "mt-2"
+  }, "\u5B50count: ", count, _react.default.createElement("button", {
+    className: "ml-5",
+    onClick: () => setCount(c => c + 1)
+  }, "click")), _react.default.createElement("div", {
+    className: "mt-2"
+  }, _react.default.createElement("input", {
+    placeholder: "text",
+    value: text,
+    onChange: e => setText(e.target.value)
+  })), _react.default.createElement("div", {
+    className: "mt-2"
+  }, _react.default.createElement("input", {
+    placeholder: "a",
+    value: a,
+    onChange: e => setA(e.target.value)
+  })));
+}
+
+var _default = App;
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./_hooks/monitor-with-deps.js":
+/*!*************************************!*\
+  !*** ./_hooks/monitor-with-deps.js ***!
+  \*************************************/
 /*! no static exports found */
 /*! all exports used */
 /*! ModuleConcatenation bailout: Module is not an ECMAScript module */
@@ -108,8 +179,10 @@ var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_mo
 
 var _reactDom = _interopRequireDefault(__webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js"));
 
-function monitor(count, text, a) {
-  console.log("count: ".concat(count, " text: ").concat(text, " a: ").concat(a));
+var _ChildApp = _interopRequireDefault(__webpack_require__(/*! ./components/ChildApp */ "./_hooks/components/ChildApp.js"));
+
+function monitor(pcount, count, text, a) {
+  console.log("props.count: ".concat(pcount, ", count: ").concat(count, " text: ").concat(text, " a: ").concat(a));
 }
 
 function App() {
@@ -118,37 +191,15 @@ function App() {
       count = _useState2[0],
       setCount = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(""),
-      _useState4 = (0, _slicedToArray2.default)(_useState3, 2),
-      text = _useState4[0],
-      setText = _useState4[1];
-
-  var _useState5 = (0, _react.useState)(""),
-      _useState6 = (0, _slicedToArray2.default)(_useState5, 2),
-      a = _useState6[0],
-      setA = _useState6[1];
-
-  (0, _react.useEffect)(() => {
-    monitor(count, text, a);
-  }, [count]);
   return _react.default.createElement("div", null, "\u5F53 props.count \u548C count \u53D8\u5316\u65F6\uFF0C\u4E0A\u62A5\u5F53\u524D\u6240\u6709\u6570\u636E", _react.default.createElement("div", {
     className: "mt-2"
-  }, "count: ", count, _react.default.createElement("button", {
+  }, "\u7236count: ", count, _react.default.createElement("button", {
     className: "ml-5",
     onClick: () => setCount(c => c + 1)
-  }, "click")), _react.default.createElement("div", {
-    className: "mt-2"
-  }, _react.default.createElement("input", {
-    placeholder: "text",
-    value: text,
-    onChange: e => setText(e.target.value)
-  })), _react.default.createElement("div", {
-    className: "mt-2"
-  }, _react.default.createElement("input", {
-    placeholder: "a",
-    value: a,
-    onChange: e => setA(e.target.value)
-  })));
+  }, "click")), _react.default.createElement(_ChildApp.default, {
+    monitor: monitor,
+    count: count
+  }));
 }
 
 _reactDom.default.render(_react.default.createElement(App, null), document.getElementById("root"));
@@ -11660,16 +11711,16 @@ __webpack_require__(/*! @babel/polyfill */ "./node_modules/@babel/polyfill/lib/i
 /***/ }),
 
 /***/ 3:
-/*!******************************************************************************************!*\
-  !*** multi ./node_modules/umi-plugin-mpa/templates/polyfill.js ./_hooks/monitor-deps.js ***!
-  \******************************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** multi ./node_modules/umi-plugin-mpa/templates/polyfill.js ./_hooks/monitor-with-deps.js ***!
+  \***********************************************************************************************/
 /*! no static exports found */
 /*! all exports used */
 /*! ModuleConcatenation bailout: Module is not an ECMAScript module */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /workspace/demo-hooks-2022/node_modules/umi-plugin-mpa/templates/polyfill.js */"./node_modules/umi-plugin-mpa/templates/polyfill.js");
-module.exports = __webpack_require__(/*! ./_hooks/monitor-deps.js */"./_hooks/monitor-deps.js");
+module.exports = __webpack_require__(/*! ./_hooks/monitor-with-deps.js */"./_hooks/monitor-with-deps.js");
 
 
 /***/ })

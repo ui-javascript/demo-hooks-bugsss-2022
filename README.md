@@ -1,6 +1,6 @@
 # README
 
-- https://ui-javascript.github.io/demo-hooks-bugsss-2022/monitor-deps.html
+- https://ui-javascript.github.io/demo-hooks-bugsss-2022/monitor-with-deps.html
 - https://ui-javascript.github.io/demo-hooks-bugsss-2022/count-after-3s@notok.html
 
 # 使用
